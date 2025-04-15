@@ -132,7 +132,6 @@ def display_data(wifi_connected, current_date, current_time, temperature, humidi
     text_surface = font.render(date_time_str, True, (255, 255, 255))
     screen.blit(text_surface, (50, 8))
 
-
     # Display Wi-Fi status
     if wifi_connected:
         screen.blit(WifiIcon, (215, 5))
@@ -148,60 +147,54 @@ def display_data(wifi_connected, current_date, current_time, temperature, humidi
     text_surface = font.render(f"{humidity} %", True, (255, 255, 255))
     screen.blit(text_surface, (140, 40))
 
-    #screen.blit(LightIntIcon, (5, 65))
-    #text_surface = font.render(f"{light_intensity} lx", True, (255, 255, 255))
-    #screen.blit(text_surface, (30, 70))
+    # Uncommented code starts here and y-values adjusted for better positioning
 
-    #screen.blit(UVIcon, (115, 65))
-    #text_surface = font.render(f"{uv_intensity} mw/cm²", True, (255, 255, 255))
-    #screen.blit(text_surface, (140, 70))
-
-    screen.blit(PressureIcon, (5, 95))
+    screen.blit(PressureIcon, (5, 65))  # Moved y from 95 to 65
     text_surface = font.render(f"{int(pressure)} hPa", True, (255, 255, 255))
-    screen.blit(text_surface, (30, 100))
+    screen.blit(text_surface, (30, 70))  # Moved y from 100 to 70
 
-    screen.blit(AltitudeIcon, (115, 95))
+    screen.blit(AltitudeIcon, (115, 65))  # Moved y from 95 to 65
     text_surface = font.render(f"{elevation} m", True, (255, 255, 255))
-    screen.blit(text_surface, (140, 100))
+    screen.blit(text_surface, (140, 70))  # Moved y from 100 to 70
 
-    screen.blit(LocationIcon, (5, 125))
+    screen.blit(LocationIcon, (5, 95))  # Moved y from 125 to 95
     text_surface = font.render(f"{latitude}, {longitude}", True, (255, 255, 255))
-    screen.blit(text_surface, (30, 130))
+    screen.blit(text_surface, (30, 100))  # Moved y from 130 to 100
 
     if wifi_connected:
-        screen.blit(HeatIcon, (5, 150))
+        screen.blit(HeatIcon, (5, 125))  # Moved y from 150 to 115
         text_surface = font.render(f"{heat_index} °C", True, (255, 255, 255))
-        screen.blit(text_surface, (30, 155))
+        screen.blit(text_surface, (30, 130))  # Moved y from 155 to 120
 
-        screen.blit(AirIcon, (115, 150))
+        screen.blit(AirIcon, (115, 125))  # Moved y from 150 to 115
         text_surface = font.render(f"{air_quality}", True, (255, 255, 255))
-        screen.blit(text_surface, (140, 155))
+        screen.blit(text_surface, (140, 130))  # Moved y from 155 to 120
 
-        screen.blit(CloudsIcon, (5, 175))
+        screen.blit(CloudsIcon, (5, 155))  # Moved y from 175 to 135
         text_surface = font.render(f"{clouds} %", True, (255, 255, 255))
-        screen.blit(text_surface, (30, 180))
+        screen.blit(text_surface, (30, 160))  # Moved y from 180 to 140
 
-        screen.blit(WindIcon, (115, 175))
+        screen.blit(WindIcon, (115, 155))  # Moved y from 175 to 135
         text_surface = font.render(f"{wind_speed}, {wind_direction}", True, (255, 255, 255))
-        screen.blit(text_surface, (140, 180))
+        screen.blit(text_surface, (140, 160))  # Moved y from 180 to 140
 
-        screen.blit(SunriseIcon, (5, 200))
+        screen.blit(SunriseIcon, (5, 185))  # Moved y from 200 to 155
         text_surface = font.render(f"{sunrise}", True, (255, 255, 255))
-        screen.blit(text_surface, (30, 205))
+        screen.blit(text_surface, (30, 190))  # Moved y from 205 to 160
 
-        screen.blit(SunsetIcon, (5, 225))
+        screen.blit(SunsetIcon, (115, 185))  # Moved y from 225 to 175
         text_surface = font.render(f"{sunset}", True, (255, 255, 255))
-        screen.blit(text_surface, (30, 230))
+        screen.blit(text_surface, (140, 190))  # Moved y from 230 to 180
 
-    pygame.draw.line(screen, (255, 255, 255), (0, 250), (screen_width, 250), 1)
+    pygame.draw.line(screen, (255, 255, 255), (0, 215), (screen_width, 215), 1)  # Moved line to match new positioning
 
     # Display rating
     text_surface = font.render(f"{rating}", True, (255, 255, 255))
-    screen.blit(text_surface, (0, 255))
+    screen.blit(text_surface, (0, 220))  # Moved y from 255 to 205
 
     # Display the evaluation message, wrapped for the screen width
     wrapped_lines = [message[i:i + 36] for i in range(0, len(message), 36)]
-    y_offset = 270
+    y_offset = 235  # Moved offset to align with the new position
     for line in wrapped_lines:
         text_surface = messageFont.render(line, True, (255, 255, 255))
         screen.blit(text_surface, (0, y_offset))
@@ -209,6 +202,7 @@ def display_data(wifi_connected, current_date, current_time, temperature, humidi
 
     pygame.display.update()
     return None
+
 
 # eval weather conditions 
 def evaluate_advance_conditions(current_time, temperature, humidity, uv_intensity, light_intensity, pressure, elevation, heat_index, air_quality, wind_speed, wind_direction, clouds):
