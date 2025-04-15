@@ -79,7 +79,7 @@ print(f"Weather: {description}")
 print(f"everthing: {everysinglefuckingthing}")
 
 aqi_api_key='8073382e8b7155e691f68762e30b59a4c517d9e3'
-
+aqi_req_url='https://api.waqi.info/feed/@9489/?token=8073382e8b7155e691f68762e30b59a4c517d9e3'
 
 
 
