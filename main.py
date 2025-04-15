@@ -148,13 +148,13 @@ def display_data(wifi_connected, current_date, current_time, temperature, humidi
     text_surface = font.render(f"{humidity} %", True, (255, 255, 255))
     screen.blit(text_surface, (140, 40))
 
-    screen.blit(LightIntIcon, (5, 65))
-    text_surface = font.render(f"{light_intensity} lx", True, (255, 255, 255))
-    screen.blit(text_surface, (30, 70))
+    #screen.blit(LightIntIcon, (5, 65))
+    #text_surface = font.render(f"{light_intensity} lx", True, (255, 255, 255))
+    #screen.blit(text_surface, (30, 70))
 
-    screen.blit(UVIcon, (115, 65))
-    text_surface = font.render(f"{uv_intensity} mw/cm²", True, (255, 255, 255))
-    screen.blit(text_surface, (140, 70))
+    #screen.blit(UVIcon, (115, 65))
+    #text_surface = font.render(f"{uv_intensity} mw/cm²", True, (255, 255, 255))
+    #screen.blit(text_surface, (140, 70))
 
     screen.blit(PressureIcon, (5, 95))
     text_surface = font.render(f"{int(pressure)} hPa", True, (255, 255, 255))
@@ -170,7 +170,7 @@ def display_data(wifi_connected, current_date, current_time, temperature, humidi
 
     if wifi_connected:
         screen.blit(HeatIcon, (5, 150))
-        text_surface = font.render(f"{heat_index} 'C", True, (255, 255, 255))
+        text_surface = font.render(f"{heat_index} °C", True, (255, 255, 255))
         screen.blit(text_surface, (30, 155))
 
         screen.blit(AirIcon, (115, 150))
@@ -740,9 +740,7 @@ def evaluate_advance_conditions(current_time, temperature, humidity, uv_intensit
     return rating, message
 
 
-current_time=time.localtime()
-current_date=time.strftime('%Y-%m-%d', current_time)
-current_time=time.strftime('%H:%M:%S', current_time)
+
 temperature = data['main']['temp']
 humidity = data['main']['humidity']
 pressure = data['main']['pressure']
@@ -754,11 +752,16 @@ longitude=data['coord']['lon']
 air_quality=aqi_data['data']['aqi']
 wind_speed=data['wind']['speed']
 wind_direction=data['wind']['deg']
-sunrise=data['sys']['sunrise']
-sunset=data['sys']['sunset']
+sunrise_raw=data['sys']['sunrise']
+sunset_raw=data['sys']['sunset']
+sunrise=time.strftime('%I:%M %p', time.localtime(sunrise_raw))
+sunset=time.strftime('%I:%M %p', time.localtime(sunset_raw))
 clouds=data['clouds']['all']
 heat_index=calculate_heat_index(temperature, humidity)
 rating, message = evaluate_advance_conditions(current_time, temperature, humidity, uv_intensity, light_intensity, pressure, elevation, heat_index, air_quality, wind_speed, wind_direction, clouds)
 
 while True:
+    current_time=time.localtime()
+    current_date=time.strftime('%Y-%m-%d', current_time)
+    current_time=time.strftime('%H:%M:%S', current_time)
     display_data(True, current_date, current_time, temperature, humidity, heat_index, light_intensity, uv_intensity, pressure, elevation, latitude, longitude, rating, message, air_quality, wind_speed, wind_direction, sunrise, sunset, clouds)
