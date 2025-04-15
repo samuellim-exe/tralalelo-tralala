@@ -79,8 +79,10 @@ print(f"Weather: {description}")
 print(f"everthing: {everysinglefuckingthing}")
 
 aqi_api_key='8073382e8b7155e691f68762e30b59a4c517d9e3'
-aqi_req_url='https://api.waqi.info/feed/@9489/?token=8073382e8b7155e691f68762e30b59a4c517d9e3'
+aqi_request_url='https://api.waqi.info/feed/@9489/?token=8073382e8b7155e691f68762e30b59a4c517d9e3'
 
+aqi_res=requests.get(aqi_request_url)
+aqi_data=aqi_res.json()
 
 
 # calculate heat index func
@@ -746,14 +748,14 @@ humidity = data['main']['humidity']
 pressure = data['main']['pressure']
 uv_intensity = 1
 elevation = 0
-latitude=coord.lat
-longitude=coord.lon
-air_quality=
-wind_speed=
-wind_direction=
-sunrise=
-sunset=
-clouds=
+latitude=['coord']['lat']
+longitude=['coord']['lon']
+air_quality=aqi_data['data']['aqi']
+wind_speed=['wind']['speed']
+wind_direction=['wind']['deg']
+sunrise=['sys']['sunrise']
+sunset=['sys']['sunset']
+clouds=['clouds']['all']
 heat_index=calculate_heat_index(temperature, humidity)
 rating, message = evaluate_advance_conditions(current_time, temperature, humidity, uv_intensity, light_intensity, pressure, elevation, heat_index, air_quality, wind_speed, wind_direction, clouds)
 
