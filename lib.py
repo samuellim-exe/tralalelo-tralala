@@ -1,11 +1,13 @@
 import pygame
 pygame.init()
 
+pygame.display.set_caption("Tralalero Tralala")
+
 
 # Set the display dimensions
 screen_width = 240
 screen_height = 320
-screen = pygame.display.set_mode((screen_width, screen_height), pygame.NOFRAME)
+screen = pygame.display.set_mode((screen_width, screen_height))
 
 fontSize = 24
 iconWidth = 24
@@ -350,15 +352,15 @@ def evaluate_advance_conditions(current_time, temperature, humidity, uv_intensit
         rating = "Caution: High UV at Elevation"
         message = "High UV intensity at high elevation. Increased risk of sunburn. Use strong sunscreen."
 
-    # High air quality index in a usually clean area (indicates pollution event)
-    elif air_quality > 100 and pressure < 980 and usually_clean_area:
-        rating = "Caution: Unusual Air Quality Event"
-        message = "Poor air quality detected in a normally clean area. Possible pollution event or wildfire smoke."
+    # # High air quality index in a usually clean area (indicates pollution event)
+    # elif air_quality > 100 and pressure < 980 and usually_clean_area:
+    #     rating = "Caution: Unusual Air Quality Event"
+    #     message = "Poor air quality detected in a normally clean area. Possible pollution event or wildfire smoke."
 
     # Sudden drop in temperature with high wind speed (indicates cold front)
-    elif temperature_drop > 10 and wind_speed > 40:
-        rating = "Caution: Cold Front"
-        message = "Sudden temperature drop with strong winds. Possible cold front. Dress warmly and prepare for rapid weather changes."
+    # elif temperature_drop > 10 and wind_speed > 40:
+    #     rating = "Caution: Cold Front"
+    #     message = "Sudden temperature drop with strong winds. Possible cold front. Dress warmly and prepare for rapid weather changes."
 
     # Low atmospheric pressure with high clouds and temperature (possible tropical storm)
     elif pressure < 940 and clouds > 90 and temperature > 25:
@@ -376,9 +378,9 @@ def evaluate_advance_conditions(current_time, temperature, humidity, uv_intensit
         message = "High winds with clear skies and low humidity. High wildfire risk. Avoid using fire."
 
     # High pressure with rapidly falling temperature (possible cold snap)
-    elif pressure > 1030 and temperature_falling > 15:
-        rating = "Caution: Cold Snap"
-        message = "High pressure with rapidly falling temperature. Cold snap likely. Prepare for sudden cold."
+    # elif pressure > 1030 and temperature_falling > 15:
+    #     rating = "Caution: Cold Snap"
+    #     message = "High pressure with rapidly falling temperature. Cold snap likely. Prepare for sudden cold."
 
     # High wind speed and high elevation (increased wind chill)
     elif wind_speed > 40 and elevation > 1500:
@@ -406,18 +408,18 @@ def evaluate_advance_conditions(current_time, temperature, humidity, uv_intensit
         message = "Low light intensity combined with high temperature. Potential for heat haze. Reduced visibility."
 
     # High cloud cover with low pressure and falling temperature (indicates a storm is approaching)
-    elif clouds > 90 and pressure < 960 and temperature_falling > 5:
-        rating = "Caution: Approaching Storm"
-        message = "High cloud cover with low pressure and falling temperature. A storm may be approaching. Take precautions."
+    # elif clouds > 90 and pressure < 960 and temperature_falling > 5:
+    #     rating = "Caution: Approaching Storm"
+    #     message = "High cloud cover with low pressure and falling temperature. A storm may be approaching. Take precautions."
     # High light intensity with low humidity (risk of dehydration)
     elif light_intensity > 90000 and humidity < 20:
         rating = "Caution: High Light and Dry Air"
         message = "Very bright conditions with low humidity. Risk of dehydration. Stay hydrated and protect your eyes."
 
     # Sudden rise in temperature with low pressure (possible heatwave)
-    elif temperature_rise > 10 and pressure < 950:
-        rating = "Caution: Heatwave"
-        message = "Rapid temperature increase with low pressure. Possible heatwave conditions. Avoid strenuous outdoor activities."
+    # elif temperature_rise > 10 and pressure < 950:
+    #     rating = "Caution: Heatwave"
+    #     message = "Rapid temperature increase with low pressure. Possible heatwave conditions. Avoid strenuous outdoor activities."
 
     # Low temperature with very high pressure (clear but cold conditions)
     elif temperature < 0 and pressure > 1040:
@@ -475,9 +477,9 @@ def evaluate_advance_conditions(current_time, temperature, humidity, uv_intensit
         message = "Very high pressure with calm winds and clear skies. Stable, dry conditions but could be chilly."
 
     # Sudden pressure drop with increasing cloud cover (indicating an approaching storm)
-    elif pressure_falling > 15 and clouds_rising > 50:
-        rating = "Caution: Storm Approaching"
-        message = "Rapid pressure drop with increasing cloud cover. A storm is likely approaching. Take precautions."
+    # elif pressure_falling > 15 and clouds_rising > 50:
+    #     rating = "Caution: Storm Approaching"
+    #     message = "Rapid pressure drop with increasing cloud cover. A storm is likely approaching. Take precautions."
 
     # Light rain with moderate winds (drizzle with breezy conditions)
     elif humidity > 85 and clouds > 70 and 10 <= wind_speed <= 30 and temperature > 10:
@@ -495,9 +497,9 @@ def evaluate_advance_conditions(current_time, temperature, humidity, uv_intensit
         message = "Very high light intensity with calm winds. Risk of glare, especially on water or snow. Wear sunglasses."
 
     # Low temperature combined with very high light intensity (risk of snow blindness)
-    elif temperature < 0 and light_intensity > 80000 and snow_coverage > 50:
-        rating = "Caution: Snow Blindness Risk"
-        message = "Very bright conditions with cold temperatures and snow coverage. Risk of snow blindness. Wear protective eyewear."
+    # elif temperature < 0 and light_intensity > 80000 and snow_coverage > 50:
+    #     rating = "Caution: Snow Blindness Risk"
+    #     message = "Very bright conditions with cold temperatures and snow coverage. Risk of snow blindness. Wear protective eyewear."
     # Low light intensity with high cloud cover and high humidity (risk of mist or light drizzle)
     elif light_intensity < 5000 and clouds > 80 and humidity > 85:
         rating = "Moderate: Mist or Drizzle"
@@ -519,19 +521,19 @@ def evaluate_advance_conditions(current_time, temperature, humidity, uv_intensit
         message = "Clear skies with very low temperature and calm winds. Extreme frost likely. Dress warmly and avoid prolonged exposure."
 
     # Sudden rise in humidity with falling pressure (indicates storm development)
-    elif humidity_rising > 20 and pressure_falling > 10:
-        rating = "Caution: Developing Storm"
-        message = "Rapid increase in humidity with falling pressure. Storm development likely. Take precautions."
+    # elif humidity_rising > 20 and pressure_falling > 10:
+    #     rating = "Caution: Developing Storm"
+    #     message = "Rapid increase in humidity with falling pressure. Storm development likely. Take precautions."
 
     # High wind speed with shifting wind direction (indicates unstable weather)
-    elif wind_speed > 40 and wind_direction_change > 90:
-        rating = "Caution: Unstable Weather"
-        message = "High winds with rapidly changing direction. Unstable weather likely. Stay alert."
+    # elif wind_speed > 40 and wind_direction_change > 90:
+    #     rating = "Caution: Unstable Weather"
+    #     message = "High winds with rapidly changing direction. Unstable weather likely. Stay alert."
 
     # High UV intensity with light snow cover (risk of snow glare)
-    elif uv_intensity > 5 and snow_coverage > 20:
-        rating = "Caution: Snow Glare"
-        message = "High UV intensity with snow cover. Increased risk of snow glare. Wear protective eyewear."
+    # elif uv_intensity > 5 and snow_coverage > 20:
+    #     rating = "Caution: Snow Glare"
+    #     message = "High UV intensity with snow cover. Increased risk of snow glare. Wear protective eyewear."
 
     # Very high humidity with moderate temperature and low pressure (tropical climate conditions)
     elif humidity > 95 and 25 <= temperature <= 30 and pressure < 970:
@@ -559,9 +561,9 @@ def evaluate_advance_conditions(current_time, temperature, humidity, uv_intensit
         message = "Very high temperature with calm winds and clear skies. High risk of heat exhaustion. Stay hydrated and avoid strenuous activities."
 
     # Low temperature with heavy snow cover and high humidity (risk of hypothermia)
-    elif temperature < 0 and snow_coverage > 50 and humidity > 85:
-        rating = "Caution: Hypothermia Risk"
-        message = "Very cold with heavy snow cover and high humidity. Risk of hypothermia. Dress warmly and limit time outdoors."
+    # elif temperature < 0 and snow_coverage > 50 and humidity > 85:
+    #     rating = "Caution: Hypothermia Risk"
+    #     message = "Very cold with heavy snow cover and high humidity. Risk of hypothermia. Dress warmly and limit time outdoors."
 
     # High pressure with high cloud cover and moderate temperature (stable but overcast conditions)
     elif pressure > 1020 and clouds > 70 and 15 <= temperature <= 25:
@@ -579,9 +581,9 @@ def evaluate_advance_conditions(current_time, temperature, humidity, uv_intensit
         message = "Calm winds with high humidity and moderate temperature. High risk of fog formation. Reduced visibility likely."
 
     # High UV intensity with low ozone levels (increased risk of UV exposure)
-    elif uv_intensity > 9 and ozone_level < 250:
-        rating = "Caution: UV Exposure"
-        message = "High UV intensity with low ozone levels. Increased risk of UV exposure. Use strong sunscreen and protective clothing."
+    # elif uv_intensity > 9 and ozone_level < 250:
+    #     rating = "Caution: UV Exposure"
+    #     message = "High UV intensity with low ozone levels. Increased risk of UV exposure. Use strong sunscreen and protective clothing."
 
     # High cloud cover with low light intensity and temperature drop (risk of snow or sleet)
     elif clouds > 90 and light_intensity < 5000 and temperature < 5:
@@ -593,9 +595,9 @@ def evaluate_advance_conditions(current_time, temperature, humidity, uv_intensit
         rating = "Leave Immediately"
         message = "Strong winds with low pressure and high humidity. Severe thunderstorms likely. Seek immediate shelter."
     # Sudden temperature drop with clear skies (risk of rapid frost formation)
-    elif temperature_drop > 10 and clouds < 5 and humidity > 80:
-        rating = "Caution: Rapid Frost Formation"
-        message = "Sudden temperature drop with clear skies and high humidity. Rapid frost formation likely. Be cautious on roads."
+    # elif temperature_drop > 10 and clouds < 5 and humidity > 80:
+    #     rating = "Caution: Rapid Frost Formation"
+    #     message = "Sudden temperature drop with clear skies and high humidity. Rapid frost formation likely. Be cautious on roads."
 
     # High elevation with high wind speed (risk of wind exposure and altitude sickness)
     elif elevation > 2500 and wind_speed > 50:
@@ -603,9 +605,9 @@ def evaluate_advance_conditions(current_time, temperature, humidity, uv_intensit
         message = "High elevation with strong winds. Increased risk of wind exposure and altitude sickness. Limit outdoor activities."
 
     # High wind speed with sudden temperature rise (risk of wildfires in dry conditions)
-    elif wind_speed > 40 and temperature_rise > 10 and humidity < 20:
-        rating = "Leave Immediately"
-        message = "Strong winds with sudden temperature rise in dry conditions. High risk of wildfires. Evacuate the area if necessary."
+    # elif wind_speed > 40 and temperature_rise > 10 and humidity < 20:
+    #     rating = "Leave Immediately"
+    #     message = "Strong winds with sudden temperature rise in dry conditions. High risk of wildfires. Evacuate the area if necessary."
 
     # Very low temperature with moderate wind speed (risk of frostbite)
     elif temperature < -15 and wind_speed in range(20, 40):
@@ -618,14 +620,14 @@ def evaluate_advance_conditions(current_time, temperature, humidity, uv_intensit
         message = "Extremely low humidity with high temperature and clear skies. Severe risk of heat stroke. Avoid outdoor activities."
 
     # Sudden increase in cloud cover with falling pressure (indicates incoming storm or front)
-    elif clouds_rising > 50 and pressure_falling > 10:
-        rating = "Caution: Incoming Storm"
-        message = "Rapid increase in cloud cover with falling pressure. An incoming storm or front is likely. Prepare accordingly."
+    # elif clouds_rising > 50 and pressure_falling > 10:
+    #     rating = "Caution: Incoming Storm"
+    #     message = "Rapid increase in cloud cover with falling pressure. An incoming storm or front is likely. Prepare accordingly."
 
     # Low light intensity with heavy snow cover and low wind speed (risk of ground blizzard)
-    elif light_intensity < 5000 and snow_coverage > 80 and wind_speed < 5:
-        rating = "Caution: Ground Blizzard Risk"
-        message = "Low light intensity with heavy snow cover and calm winds. Ground blizzard conditions possible. Stay indoors."
+    # elif light_intensity < 5000 and snow_coverage > 80 and wind_speed < 5:
+    #     rating = "Caution: Ground Blizzard Risk"
+    #     message = "Low light intensity with heavy snow cover and calm winds. Ground blizzard conditions possible. Stay indoors."
 
     # High wind speed with very low humidity (risk of dust storms in arid regions)
     elif wind_speed > 50 and humidity < 10 and temperature > 30:
@@ -633,9 +635,9 @@ def evaluate_advance_conditions(current_time, temperature, humidity, uv_intensit
         message = "Strong winds with very low humidity in hot conditions. High risk of dust storms. Evacuate or take shelter immediately."
 
     # High UV intensity with low cloud cover and high ozone levels (risk of ozone-induced respiratory issues)
-    elif uv_intensity > 8 and clouds < 10 and ozone_level > 350:
-        rating = "Caution: Ozone Risk"
-        message = "High UV intensity with low cloud cover and elevated ozone levels. Increased risk of respiratory issues. Minimize outdoor exposure."
+    # elif uv_intensity > 8 and clouds < 10 and ozone_level > 350:
+    #     rating = "Caution: Ozone Risk"
+    #     message = "High UV intensity with low cloud cover and elevated ozone levels. Increased risk of respiratory issues. Minimize outdoor exposure."
 
     # High humidity with low temperature and low wind speed (risk of freezing fog)
     elif humidity > 95 and temperature < 0 and wind_speed < 5:
@@ -668,9 +670,9 @@ def evaluate_advance_conditions(current_time, temperature, humidity, uv_intensit
         message = "Low humidity with moderate temperatures at high elevation. Increased risk of dehydration. Stay hydrated."
 
     # High light intensity with calm winds and heavy snow cover (risk of snow blindness in clear, calm conditions)
-    elif light_intensity > 100000 and wind_speed < 5 and snow_coverage > 70:
-        rating = "Caution: Snow Blindness Risk"
-        message = "Very bright conditions with calm winds and heavy snow cover. Risk of snow blindness. Wear protective eyewear."
+    # elif light_intensity > 100000 and wind_speed < 5 and snow_coverage > 70:
+    #     rating = "Caution: Snow Blindness Risk"
+    #     message = "Very bright conditions with calm winds and heavy snow cover. Risk of snow blindness. Wear protective eyewear."
 
     # Low light intensity with moderate wind speed and low temperature (risk of black ice formation)
     elif light_intensity < 5000 and wind_speed in range(10, 30) and temperature in range(-5, 3):
@@ -678,9 +680,9 @@ def evaluate_advance_conditions(current_time, temperature, humidity, uv_intensit
         message = "Low light intensity with moderate winds and near-freezing temperatures. Black ice formation likely. Drive cautiously."
 
     # Sudden drop in temperature with heavy rain and high wind speed (risk of flash freeze)
-    elif temperature_drop > 10 and humidity > 90 and wind_speed > 40 and temperature in range(1, 5):
-        rating = "Caution: Flash Freeze Risk"
-        message = "Sudden drop in temperature with heavy rain and strong winds. Risk of flash freeze on surfaces. Avoid travel if possible."
+    # elif temperature_drop > 10 and humidity > 90 and wind_speed > 40 and temperature in range(1, 5):
+    #     rating = "Caution: Flash Freeze Risk"
+    #     message = "Sudden drop in temperature with heavy rain and strong winds. Risk of flash freeze on surfaces. Avoid travel if possible."
 
     # High atmospheric pressure with high wind speed (risk of wind damage despite stable pressure)
     elif pressure > 1030 and wind_speed > 70:
@@ -698,9 +700,9 @@ def evaluate_advance_conditions(current_time, temperature, humidity, uv_intensit
         message = "High UV intensity with moderate humidity and temperature. Increased risk of heat cramps during physical activity. Stay hydrated and take breaks."
 
     # Sudden rise in wind speed with dropping temperature and low pressure (indicates a possible cold front)
-    elif wind_speed_rising > 20 and temperature_falling > 5 and pressure < 960:
-        rating = "Caution: Cold Front Approaching"
-        message = "Rapid increase in wind speed with falling temperature and low pressure. Possible cold front. Prepare for colder conditions."
+    # elif wind_speed_rising > 20 and temperature_falling > 5 and pressure < 960:
+    #     rating = "Caution: Cold Front Approaching"
+    #     message = "Rapid increase in wind speed with falling temperature and low pressure. Possible cold front. Prepare for colder conditions."
 
     # High light intensity with very low humidity and clear skies (risk of dehydration and sunstroke)
     elif light_intensity > 100000 and humidity < 10 and clouds < 5:
